@@ -46,3 +46,19 @@ sudo -E bash mknasdir.sh    \
 
 ./docker-compose-wrapper.sh audiobookshelf up -d
 ```
+
+## VPN
+
+Add to your `.ovpn` file ip addresses if you want enable split tunneling
+
+```
+pull-filter ignore redirect-gateway
+
+# route {ip} {mask}
+route 1.2.3.4 255.255.255.255
+route 5.6.7.8 255.255.255.255
+```
+
+```sh
+./docker-compose-wrapper.sh vpn up -d
+```

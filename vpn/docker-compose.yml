@@ -1,0 +1,14 @@
+services:
+  vpn:
+    image: dperson/openvpn-client
+    container_name: vpn
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      TZ: ${TZ:?}
+      DNS: true
+      DEFAULT_GATEWAY: false
+    volumes:
+      - ${PATH_TO_OPENVPN_CONFIG:?}:/vpn/config.ovpn:ro
