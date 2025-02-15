@@ -49,7 +49,7 @@ sudo -E bash mknasdir.sh    \
 
 ## VPN
 
-Add to your `.ovpn` file ip addresses if you want enable split tunneling
+Add to your `.ovpn` file ip addresses if you want to enable split tunneling
 
 ```
 pull-filter ignore redirect-gateway
