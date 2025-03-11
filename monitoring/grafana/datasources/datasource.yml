@@ -8,8 +8,8 @@ datasources:
     isDefault: true
     jsonData:
       version: Flux
-      organization: nas
-      defaultBucket: nas
+      organization: ${INFLUXDB_ORG}
+      defaultBucket: ${INFLUXDB_BUCKET}
       tlsSkipVerify: true
     secureJsonData:
       token: ${INFLUXDB_TOKEN}
