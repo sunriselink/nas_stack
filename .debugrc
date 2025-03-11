@@ -9,6 +9,10 @@ export PATH_TO_AUDIOBOOKS=/tmp/nas_debug/media/audiobooks
 
 export NEXTCLOUD_DB_PASSWORD=Qwerty123
 
+export INFLUXDB_USERNAME=admin
+export INFLUXDB_PASSWORD=Qwerty123
+export INFLUXDB_TOKEN=dGVzdA==
+
 mkdir -p /tmp/nas_debug
 
 sudo -E bash ./mknasdir.sh          \
