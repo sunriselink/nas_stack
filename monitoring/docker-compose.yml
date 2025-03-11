@@ -1,15 +1,13 @@
 services:
   grafana:
     image: grafana/grafana:11.5.2
-    container_name: monitor_grafana
+    container_name: monitoring_grafana
     restart: unless-stopped
     user: ${NAS_UID:?}:${NAS_GID:?}
     ports:
       - 3000:3000
     environment:
       TZ: ${TZ:?}
-      GF_SECURITY_ADMIN_USER: admin
-      GF_SECURITY_ADMIN_PASSWORD: admin
       INFLUXDB_TOKEN: ${INFLUXDB_TOKEN:?}
     volumes:
       - ./grafana/data:/var/lib/grafana
@@ -20,12 +18,22 @@ services:
 
   telegraf:
     image: telegraf:1.33
-    container_name: monitor_telegraf
+    container_name: monitoring_telegraf
     restart: unless-stopped
+    user: telegraf:${DOCKER_GID:?}
+    environment:
+      INFLUXDB_TOKEN: ${INFLUXDB_TOKEN:?}
+    volumes:
+      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /:/hostfs:ro
+    depends_on:
+      influxdb:
+        condition: service_healthy
 
   influxdb:
     image: influxdb:2.7.11
-    container_name: monitor_influxdb
+    container_name: monitoring_influxdb
     restart: unless-stopped
     user: ${NAS_UID:?}:${NAS_GID:?}
     environment:

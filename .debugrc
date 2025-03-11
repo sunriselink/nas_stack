@@ -1,6 +1,7 @@
 export NAS_USER=$(whoami)
 export NAS_UID=$(id -u)
 export NAS_GID=$(id -g)
+export DOCKER_GID=$(getent group docker | cut -d: -f3)
 export TZ=$(cat /etc/timezone)
 
 export PATH_TO_DATA=/tmp/nas_debug/data

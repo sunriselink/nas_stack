@@ -18,11 +18,15 @@ source .debugrc
 ./docker-compose-wrapper.sh portainer up -d
 ```
 
+`http://localhost:9000`
+
 ## Jellyfin
 
 ```sh
 ./docker-compose-wrapper.sh jellyfin up -d
 ```
+
+`http://localhost:8096`
 
 ## Nextcloud
 
@@ -37,6 +41,8 @@ sudo -E bash mknasdir.sh    \
 ./docker-compose-wrapper.sh nextcloud up -d
 ```
 
+`http://localhost:8080`
+
 ## Audiobookshelf
 
 ```sh
@@ -46,3 +52,21 @@ sudo -E bash mknasdir.sh    \
 
 ./docker-compose-wrapper.sh audiobookshelf up -d
 ```
+
+`http://localhost:13378`
+
+## Monitoring (TIG - Telegraf + InfluxDB + Grafana)
+
+```sh
+sudo -E bash mknasdir.sh        \
+    monitoring/grafana/data     \
+    monitoring/influxdb         \
+    monitoring/influxdb/config  \
+    monitoring/influxdb/data
+
+./docker-compose-wrapper.sh monitoring up -d
+```
+
+`http://localhost:3000`
+
+Default `login:password` is `admin:admin`
