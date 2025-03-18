@@ -2,71 +2,23 @@
 
 ## First steps
 
-- Create a `nas` user
-- Add current user to `nas` group
-- Fill missing variables in `global.env`
+- Create a `nas` user (recommended)
+- Add current user to `nas` group (recommended)
+- Create `global.env` file from `global.env.example` and fill missing variables
+- Create `.env` files from `.env.example` for each stack and fill missing variables
 
-Or for debugging execute
+## Container management
 
-```sh
-source .debugrc
-```
-
-## Portainer
+### Local
 
 ```sh
-./docker-compose-wrapper.sh portainer up -d
+./docker-compose-wrapper.sh STACK_NAME COMPOSE_COMMANDS
 ```
 
-`http://localhost:9000`
+### OpenMediaVault
 
-## Jellyfin
+Go to `Services -> Compose -> Files` (`Edit global environment file` button) and place all from `global.env` into text field.
 
-```sh
-./docker-compose-wrapper.sh jellyfin up -d
-```
+### Portainer
 
-`http://localhost:8096`
-
-## Nextcloud
-
-```sh
-sudo -E bash mknasdir.sh    \
-    nextcloud/config        \
-    nextcloud/custom_apps   \
-    nextcloud/data          \
-    nextcloud/postgres_data \
-    nextcloud/themes
-
-./docker-compose-wrapper.sh nextcloud up -d
-```
-
-`http://localhost:8080`
-
-## Audiobookshelf
-
-```sh
-sudo -E bash mknasdir.sh    \
-    audiobookshelf/config   \
-    audiobookshelf/metadata
-
-./docker-compose-wrapper.sh audiobookshelf up -d
-```
-
-`http://localhost:13378`
-
-## Monitoring (TIG - Telegraf + InfluxDB + Grafana)
-
-```sh
-sudo -E bash mknasdir.sh        \
-    monitoring/grafana/data     \
-    monitoring/influxdb         \
-    monitoring/influxdb/config  \
-    monitoring/influxdb/data
-
-./docker-compose-wrapper.sh monitoring up -d
-```
-
-`http://localhost:3000`
-
-Default `login:password` is `admin:admin`
+`global.env` file will need to be loaded into Portainer for each stack (unfortunately).
