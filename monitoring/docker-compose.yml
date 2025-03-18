@@ -1,4 +1,14 @@
 services:
+  init:
+    image: alpine
+    entrypoint: install -d -o ${NAS_UID:?} -g ${NAS_GID:?} -m 770
+    volumes:
+      - ${PATH_TO_ROOT:?}/monitoring:/tmp/monitoring
+    command:
+      - /tmp/monitoring/grafana/data
+      - /tmp/monitoring/influxdb/data
+      - /tmp/monitoring/influxdb/config
+
   grafana:
     image: grafana/grafana:11.5.2
     container_name: monitoring_grafana
@@ -12,9 +22,11 @@ services:
       INFLUXDB_BUCKET: ${INFLUXDB_BUCKET:?}
       INFLUXDB_TOKEN: ${INFLUXDB_TOKEN:?}
     volumes:
-      - ./grafana/data:/var/lib/grafana
-      - ./grafana/datasources:/etc/grafana/provisioning/datasources:ro
+      - ${PATH_TO_ROOT:?}/monitoring/grafana/data:/var/lib/grafana
+      - ${PATH_TO_ROOT:?}/monitoring/grafana/datasources:/etc/grafana/provisioning/datasources:ro
     depends_on:
+      init:
+        condition: service_completed_successfully
       influxdb:
         condition: service_healthy
 
@@ -28,7 +40,7 @@ services:
       INFLUXDB_BUCKET: ${INFLUXDB_BUCKET:?}
       INFLUXDB_TOKEN: ${INFLUXDB_TOKEN:?}
     volumes:
-      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - ${PATH_TO_ROOT:?}/monitoring/telegraf.conf:/etc/telegraf/telegraf.conf:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /:/hostfs:ro
     depends_on:
@@ -48,8 +60,11 @@ services:
       DOCKER_INFLUXDB_INIT_PASSWORD: ${INFLUXDB_PASSWORD:?}
       DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: ${INFLUXDB_TOKEN:?}
     volumes:
-      - ./influxdb/data:/var/lib/influxdb2
-      - ./influxdb/config:/etc/influxdb2
+      - ${PATH_TO_ROOT:?}/monitoring/influxdb/data:/var/lib/influxdb2
+      - ${PATH_TO_ROOT:?}/monitoring/influxdb/config:/etc/influxdb2
+    depends_on:
+      init:
+        condition: service_completed_successfully
     healthcheck:
       test: "curl -f http://localhost:8086/ping"
       interval: 5s
