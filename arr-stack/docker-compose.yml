@@ -1,0 +1,33 @@
+services:
+  init:
+    image: alpine
+    entrypoint: install -d -o ${NAS_UID:?} -g ${NAS_GID:?} -m 770
+    volumes:
+      - ${PATH_TO_MEDIA:?}:/tmp/media
+    command:
+      - /tmp/media
+      - /tmp/media/music
+      - /tmp/media/downloads
+
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:2.9.6
+    container_name: lidarr
+    restart: unless-stopped
+    networks:
+      - proxy
+    ports:
+      - 8686:8686 # remove it
+    environment:
+      PUID: ${NAS_UID:?}
+      PGID: ${NAS_GID:?}
+      TZ: ${TZ:?}
+    volumes:
+      - ${PATH_TO_ROOT:?}/arr-stack/lidarr:/config
+      - ${PATH_TO_MEDIA:?}:/data
+    depends_on:
+      init:
+        condition: service_completed_successfully
+
+networks:
+  proxy:
+    external: true
