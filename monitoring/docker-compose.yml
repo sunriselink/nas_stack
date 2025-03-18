@@ -14,8 +14,9 @@ services:
     container_name: monitoring_grafana
     restart: unless-stopped
     user: ${NAS_UID:?}:${NAS_GID:?}
-    ports:
-      - 3000:3000
+    networks:
+      - default
+      - proxy
     environment:
       TZ: ${TZ:?}
       INFLUXDB_ORG: ${INFLUXDB_ORG:?}
@@ -70,3 +71,7 @@ services:
       interval: 5s
       timeout: 10s
       retries: 5
+
+networks:
+  proxy:
+    external: true
