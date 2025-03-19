@@ -24,11 +24,27 @@ Go to `Services -> Compose -> Files` (`Edit global environment file` button) and
 
 `global.env` file will need to be loaded into Portainer for each stack (unfortunately).
 
-## Default users
+## More information
 
 ### Nginx Proxy Manager
+
+Default user
 
 ```
 Email: admin@example.com
 Password: changeme
 ```
+
+### qBittorrent
+
+Default user
+
+```
+Username: admin
+Password: <view container logs>
+```
+
+Settings
+1. WebUI > Use alternative WebUI: checked
+2. WebUI > Files location: `/vuetorrent`
+3. Downloads > Default Save Path: `/data/downloads` (important)
