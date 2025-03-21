@@ -26,15 +26,6 @@ Go to `Services -> Compose -> Files` (`Edit global environment file` button) and
 
 ## More information
 
-### Nginx Proxy Manager
-
-Default user
-
-```
-Email: admin@example.com
-Password: changeme
-```
-
 ### qBittorrent
 
 Default user
