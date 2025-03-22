@@ -10,6 +10,14 @@ http://nextcloud.{$HOST_INTERNAL} {
     reverse_proxy nextcloud:80
 }
 
-http://portainer.{$HOST_INTERNAL} {
-    reverse_proxy portainer:9000
+http://lidarr.{$HOST_INTERNAL} {
+    reverse_proxy lidarr:8686
+}
+
+http://jackett.{$HOST_INTERNAL} {
+    reverse_proxy jackett:9117
+}
+
+http://qbittorrent.{$HOST_INTERNAL} {
+    reverse_proxy qbittorrent:8080
 }
