@@ -23,3 +23,7 @@ http://jellyfin.{$HOST_INTERNAL} {
 http://nextcloud.{$HOST_INTERNAL} {
     reverse_proxy nextcloud:80
 }
+
+http://grafana.{$HOST_INTERNAL} {
+    reverse_proxy grafana:3000
+}
