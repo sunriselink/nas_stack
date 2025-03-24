@@ -23,3 +23,7 @@ http://jellyfin.{$HOST_INTERNAL} {
 http://nextcloud.{$HOST_INTERNAL} {
     reverse_proxy nextcloud:80
 }
+
+http://glances.{$HOST_INTERNAL} {
+    reverse_proxy glances:61208
+}

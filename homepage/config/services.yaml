@@ -44,3 +44,25 @@
       widget:
         type: caddy
         url: http://caddy.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+
+- Monitoring:
+  - CPU Usage:
+      widget:
+        type: glances
+        url: http://glances.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+        metric: cpu
+        version: 4
+
+  - Memory Usage:
+      widget:
+        type: glances
+        url: http://glances.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+        metric: memory
+        version: 4
+
+  - Containers:
+      widget:
+        type: glances
+        url: http://glances.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+        metric: containers
+        version: 4

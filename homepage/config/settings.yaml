@@ -2,7 +2,7 @@ title: My NAS
 theme: dark
 color: slate
 background: /images/background.jpg
-headerStyle: clean
+headerStyle: boxedWidgets
 cardBlur: sm
 disableCollapse: true
 showStats: true
