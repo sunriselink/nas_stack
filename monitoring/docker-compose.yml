@@ -6,6 +6,7 @@ services:
       - ${PATH_TO_ROOT:?}/monitoring:/tmp/monitoring
     command:
       - /tmp/monitoring/grafana/data
+      - /tmp/monitoring/influxdb
       - /tmp/monitoring/influxdb/data
       - /tmp/monitoring/influxdb/config
 
