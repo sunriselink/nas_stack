@@ -48,3 +48,12 @@ Default user
 Username: admin
 Password: admin
 ```
+
+### Grafana
+
+Default user
+
+```
+Username: admin
+Password: admin
+```
