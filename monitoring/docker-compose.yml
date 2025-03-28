@@ -26,7 +26,7 @@ services:
       INFLUXDB_TOKEN: ${INFLUXDB_TOKEN:?}
     volumes:
       - ${PATH_TO_ROOT:?}/monitoring/grafana/data:/var/lib/grafana
-      - ${PATH_TO_ROOT:?}/monitoring/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+      - ${PATH_TO_ROOT:?}/monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
     depends_on:
       init:
         condition: service_completed_successfully
