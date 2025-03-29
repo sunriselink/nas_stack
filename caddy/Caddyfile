@@ -48,6 +48,10 @@ http://filebrowser.{$HOST_INTERNAL} {
     reverse_proxy filebrowser:80
 }
 
+http://glances.{$HOST_INTERNAL} {
+    reverse_proxy glances:61208
+}
+
 http://grafana.{$HOST_INTERNAL} {
     reverse_proxy grafana:3000
 }
