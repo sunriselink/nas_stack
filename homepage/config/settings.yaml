@@ -5,4 +5,3 @@ background: /images/background.jpg
 headerStyle: boxedWidgets
 cardBlur: sm
 disableCollapse: true
-showStats: true
