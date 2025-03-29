@@ -7,8 +7,6 @@ services:
     command:
       - /tmp/monitoring/grafana/data
       - /tmp/monitoring/influxdb
-      - /tmp/monitoring/influxdb/data
-      - /tmp/monitoring/influxdb/config
 
   # https://hub.docker.com/r/grafana/grafana/tags
   grafana:
@@ -21,12 +19,12 @@ services:
       - proxy
     environment:
       TZ: ${TZ:?}
-      INFLUXDB_ORG: ${INFLUXDB_ORG:?}
-      INFLUXDB_BUCKET: ${INFLUXDB_BUCKET:?}
-      INFLUXDB_TOKEN: ${INFLUXDB_TOKEN:?}
+      INFLUXDB_DB: ${INFLUXDB_DB:?}
+      INFLUXDB_USERNAME: ${INFLUXDB_USERNAME:?}
+      INFLUXDB_PASSWORD: ${INFLUXDB_PASSWORD:?}
     volumes:
       - ${PATH_TO_ROOT:?}/monitoring/grafana/data:/var/lib/grafana
-      - ${PATH_TO_ROOT:?}/monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      # - ${PATH_TO_ROOT:?}/monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
     depends_on:
       init:
         condition: service_completed_successfully
@@ -40,9 +38,9 @@ services:
     restart: unless-stopped
     user: telegraf:${DOCKER_GID:?}
     environment:
-      INFLUXDB_ORG: ${INFLUXDB_ORG:?}
-      INFLUXDB_BUCKET: ${INFLUXDB_BUCKET:?}
-      INFLUXDB_TOKEN: ${INFLUXDB_TOKEN:?}
+      INFLUXDB_DB: ${INFLUXDB_DB:?}
+      INFLUXDB_USERNAME: ${INFLUXDB_USERNAME:?}
+      INFLUXDB_PASSWORD: ${INFLUXDB_PASSWORD:?}
     volumes:
       - ${PATH_TO_ROOT:?}/monitoring/telegraf.conf:/etc/telegraf/telegraf.conf:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -53,25 +51,21 @@ services:
 
   # https://hub.docker.com/_/influxdb/tags
   influxdb:
-    image: influxdb:2.7.11
+    image: influxdb:1.11.8
     container_name: monitoring_influxdb
     restart: unless-stopped
     user: ${NAS_UID:?}:${NAS_GID:?}
     environment:
-      DOCKER_INFLUXDB_INIT_MODE: setup
-      DOCKER_INFLUXDB_INIT_ORG: ${INFLUXDB_ORG:?}
-      DOCKER_INFLUXDB_INIT_BUCKET: ${INFLUXDB_BUCKET:?}
-      DOCKER_INFLUXDB_INIT_USERNAME: ${INFLUXDB_USERNAME:?}
-      DOCKER_INFLUXDB_INIT_PASSWORD: ${INFLUXDB_PASSWORD:?}
-      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: ${INFLUXDB_TOKEN:?}
+      INFLUXDB_DB: ${INFLUXDB_DB:?}
+      INFLUXDB_ADMIN_USER: ${INFLUXDB_USERNAME:?}
+      INFLUXDB_ADMIN_PASSWORD: ${INFLUXDB_PASSWORD:?}
     volumes:
-      - ${PATH_TO_ROOT:?}/monitoring/influxdb/data:/var/lib/influxdb2
-      - ${PATH_TO_ROOT:?}/monitoring/influxdb/config:/etc/influxdb2
+      - ${PATH_TO_ROOT:?}/monitoring/influxdb:/var/lib/influxdb
     depends_on:
       init:
         condition: service_completed_successfully
     healthcheck:
-      test: "curl -f http://localhost:8086/ping"
+      test: "curl -f http://localhost:8086/health"
       interval: 5s
       timeout: 10s
       retries: 5
