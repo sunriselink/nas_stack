@@ -4,54 +4,69 @@
     }
 }
 
-http://caddy.{$ROOT_DOMAIN} {
+:80, :443 {
+    @deny_external {
+        not remote_ip 192.168.88.147 127.0.0.1
+
+        not host audiobookshelf.{$ROOT_DOMAIN}
+        not host jellyfin.{$ROOT_DOMAIN}
+    }
+
+    respond @deny_external 403
+}
+
+*.{$ROOT_DOMAIN} {
+    tls internal # Temp
+}
+
+caddy.{$ROOT_DOMAIN} {
     reverse_proxy localhost:2019
 }
 
-http://audiobookshelf.{$ROOT_DOMAIN} {
+audiobookshelf.{$ROOT_DOMAIN} {
     reverse_proxy audiobookshelf:80
 }
 
-http://homepage.{$ROOT_DOMAIN} {
+homepage.{$ROOT_DOMAIN} {
     reverse_proxy homepage:3000
 }
 
-http://jellyfin.{$ROOT_DOMAIN} {
+jellyfin.{$ROOT_DOMAIN} {
     reverse_proxy jellyfin:8096
 }
 
-http://nextcloud.{$ROOT_DOMAIN} {
+nextcloud.{$ROOT_DOMAIN} {
     reverse_proxy nextcloud:80
 }
 
-http://radarr.{$ROOT_DOMAIN} {
+radarr.{$ROOT_DOMAIN} {
     reverse_proxy radarr:7878
 }
 
-http://sonarr.{$ROOT_DOMAIN} {
+sonarr.{$ROOT_DOMAIN} {
     reverse_proxy sonarr:8989
 }
 
-http://lidarr.{$ROOT_DOMAIN} {
+lidarr.{$ROOT_DOMAIN} {
     reverse_proxy lidarr:8686
 }
 
-http://prowlarr.{$ROOT_DOMAIN} {
+prowlarr.{$ROOT_DOMAIN} {
     reverse_proxy prowlarr:9696
 }
 
-http://qbittorrent.{$ROOT_DOMAIN} {
+qbittorrent.{$ROOT_DOMAIN} {
     reverse_proxy qbittorrent:8080
 }
 
-http://filebrowser.{$ROOT_DOMAIN} {
+filebrowser.{$ROOT_DOMAIN} {
     reverse_proxy filebrowser:80
 }
 
-http://glances.{$ROOT_DOMAIN} {
+glances.{$ROOT_DOMAIN} {
     reverse_proxy glances:61208
 }
 
-http://dozzle.{$ROOT_DOMAIN} {
+dozzle.{$ROOT_DOMAIN} {
     reverse_proxy dozzle:8080
 }
