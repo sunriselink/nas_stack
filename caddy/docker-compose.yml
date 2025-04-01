@@ -21,7 +21,7 @@ services:
       - 443:443
       - 443:443/udp
     environment:
-      HOST_INTERNAL: ${HOST_INTERNAL:?}
+      ROOT_DOMAIN: ${ROOT_DOMAIN:?}
     volumes:
       - ${PATH_TO_ROOT:?}/caddy/data:/data
       - ${PATH_TO_ROOT:?}/caddy/config:/config

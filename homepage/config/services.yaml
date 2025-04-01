@@ -1,68 +1,68 @@
 - Media:
   - Jellyfin:
       icon: jellyfin.png
-      href: http://jellyfin.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+      href: http://jellyfin.{{HOMEPAGE_VAR_ROOT_DOMAIN}}
       description: The Free Software Media System
       widget:
         type: jellyfin
-        url: http://jellyfin.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+        url: http://jellyfin.{{HOMEPAGE_VAR_ROOT_DOMAIN}}
         key: "{{HOMEPAGE_VAR_JELLYFIN_API_KEY}}"
         enableBlocks: true
         enableNowPlaying: false
 
   - Audiobookshelf:
       icon: audiobookshelf.png
-      href: http://audiobookshelf.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+      href: http://audiobookshelf.{{HOMEPAGE_VAR_ROOT_DOMAIN}}
       description: Self-hosted audiobook and podcast server
       widget:
         type: audiobookshelf
-        url: http://audiobookshelf.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+        url: http://audiobookshelf.{{HOMEPAGE_VAR_ROOT_DOMAIN}}
         key: "{{HOMEPAGE_VAR_AUDIOBOOKSHELF_API_KEY}}"
 
   - Radarr:
       icon: radarr.png
-      href: http://radarr.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+      href: http://radarr.{{HOMEPAGE_VAR_ROOT_DOMAIN}}
       description: Movie collection manager
       widget:
         type: radarr
-        url: http://radarr.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+        url: http://radarr.{{HOMEPAGE_VAR_ROOT_DOMAIN}}
         key: "{{HOMEPAGE_VAR_RADARR_API_KEY}}"
 
   - Sonarr:
       icon: sonarr.png
-      href: http://sonarr.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+      href: http://sonarr.{{HOMEPAGE_VAR_ROOT_DOMAIN}}
       description: TV shows collection manager
       widget:
         type: sonarr
-        url: http://sonarr.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+        url: http://sonarr.{{HOMEPAGE_VAR_ROOT_DOMAIN}}
         key: "{{HOMEPAGE_VAR_SONARR_API_KEY}}"
 
   - Lidarr:
       icon: lidarr.png
-      href: http://lidarr.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+      href: http://lidarr.{{HOMEPAGE_VAR_ROOT_DOMAIN}}
       description: Music collection manager
       widget:
         type: lidarr
-        url: http://lidarr.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+        url: http://lidarr.{{HOMEPAGE_VAR_ROOT_DOMAIN}}
         key: "{{HOMEPAGE_VAR_LIDARR_API_KEY}}"
 
   - Prowlarr:
       icon: prowlarr.png
-      href: http://prowlarr.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+      href: http://prowlarr.{{HOMEPAGE_VAR_ROOT_DOMAIN}}
       description: Indexer manager/proxy
       widget:
         type: prowlarr
-        url: http://prowlarr.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+        url: http://prowlarr.{{HOMEPAGE_VAR_ROOT_DOMAIN}}
         key: "{{HOMEPAGE_VAR_PROWLARR_API_KEY}}"
 
 - Cloud:
   - Nextcloud:
       icon: nextcloud.png
-      href: http://nextcloud.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+      href: http://nextcloud.{{HOMEPAGE_VAR_ROOT_DOMAIN}}
       description: Open source content collaboration platform
       widget:
         type: nextcloud
-        url: http://nextcloud.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+        url: http://nextcloud.{{HOMEPAGE_VAR_ROOT_DOMAIN}}
         key: "{{HOMEPAGE_VAR_NEXTCLOUD_API_KEY}}"
 
 - Admin:
@@ -71,24 +71,24 @@
       description: The Ultimate Server with Automatic HTTPS
       widget:
         type: caddy
-        url: http://caddy.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+        url: http://caddy.{{HOMEPAGE_VAR_ROOT_DOMAIN}}
 
   - Dozzle:
       icon: dozzle.png
-      href: http://dozzle.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+      href: http://dozzle.{{HOMEPAGE_VAR_ROOT_DOMAIN}}
       description: Simple Container Monitoring and Logging
 
 - Monitoring:
   - CPU Usage:
       widget:
         type: glances
-        url: http://glances.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+        url: http://glances.{{HOMEPAGE_VAR_ROOT_DOMAIN}}
         metric: cpu
         version: 4
 
   - Memory Usage:
       widget:
         type: glances
-        url: http://glances.{{HOMEPAGE_VAR_HOST_INTERNAL}}
+        url: http://glances.{{HOMEPAGE_VAR_ROOT_DOMAIN}}
         metric: memory
         version: 4

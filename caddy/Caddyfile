@@ -1,57 +1,57 @@
 {
     admin {
-        origins "caddy.{$HOST_INTERNAL}"
+        origins "caddy.{$ROOT_DOMAIN}"
     }
 }
 
-http://caddy.{$HOST_INTERNAL} {
+http://caddy.{$ROOT_DOMAIN} {
     reverse_proxy localhost:2019
 }
 
-http://audiobookshelf.{$HOST_INTERNAL} {
+http://audiobookshelf.{$ROOT_DOMAIN} {
     reverse_proxy audiobookshelf:80
 }
 
-http://homepage.{$HOST_INTERNAL} {
+http://homepage.{$ROOT_DOMAIN} {
     reverse_proxy homepage:3000
 }
 
-http://jellyfin.{$HOST_INTERNAL} {
+http://jellyfin.{$ROOT_DOMAIN} {
     reverse_proxy jellyfin:8096
 }
 
-http://nextcloud.{$HOST_INTERNAL} {
+http://nextcloud.{$ROOT_DOMAIN} {
     reverse_proxy nextcloud:80
 }
 
-http://radarr.{$HOST_INTERNAL} {
+http://radarr.{$ROOT_DOMAIN} {
     reverse_proxy radarr:7878
 }
 
-http://sonarr.{$HOST_INTERNAL} {
+http://sonarr.{$ROOT_DOMAIN} {
     reverse_proxy sonarr:8989
 }
 
-http://lidarr.{$HOST_INTERNAL} {
+http://lidarr.{$ROOT_DOMAIN} {
     reverse_proxy lidarr:8686
 }
 
-http://prowlarr.{$HOST_INTERNAL} {
+http://prowlarr.{$ROOT_DOMAIN} {
     reverse_proxy prowlarr:9696
 }
 
-http://qbittorrent.{$HOST_INTERNAL} {
+http://qbittorrent.{$ROOT_DOMAIN} {
     reverse_proxy qbittorrent:8080
 }
 
-http://filebrowser.{$HOST_INTERNAL} {
+http://filebrowser.{$ROOT_DOMAIN} {
     reverse_proxy filebrowser:80
 }
 
-http://glances.{$HOST_INTERNAL} {
+http://glances.{$ROOT_DOMAIN} {
     reverse_proxy glances:61208
 }
 
-http://dozzle.{$HOST_INTERNAL} {
+http://dozzle.{$ROOT_DOMAIN} {
     reverse_proxy dozzle:8080
 }
