@@ -25,6 +25,11 @@ services:
     volumes:
       - ${PATH_TO_ROOT:?}/monitoring/grafana/data:/var/lib/grafana
       - ${PATH_TO_ROOT:?}/monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.grafana.entrypoints=local-secure
+      - traefik.http.routers.grafana.rule=Host(`grafana.${ROOT_DOMAIN:?}`)
+      - traefik.http.services.grafana.loadbalancer.server.port=3000
     depends_on:
       init:
         condition: service_completed_successfully
