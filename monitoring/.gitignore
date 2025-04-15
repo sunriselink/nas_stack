@@ -1,2 +1,3 @@
 /grafana/data
-/influxdb
+/influxdb_v1
+/influxdb_v2

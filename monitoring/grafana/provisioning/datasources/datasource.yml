@@ -4,11 +4,36 @@ datasources:
   - name: InfluxDB v1 (InfluxQL)
     type: influxdb
     access: proxy
-    url: http://influxdb:8086
+    url: http://influxdb_v1:8086
     user: ${INFLUXDB_USERNAME}
-    isDefault: true
+    # isDefault: true
     jsonData:
       dbName: ${INFLUXDB_DB}
       httpMode: GET
     secureJsonData:
       password: ${INFLUXDB_PASSWORD}
+
+  - name: InfluxDB v2 (InfluxQL)
+    type: influxdb
+    access: proxy
+    url: http://influxdb_v2:8086
+    # isDefault: true
+    jsonData:
+      version: InfluxQL
+      dbName: ${INFLUXDB_BUCKET}
+      httpHeaderName1: Authorization
+    secureJsonData:
+      httpHeaderValue1: Token ${INFLUXDB_ADMIN_TOKEN}
+
+  - name: InfluxDB v2 (Flux)
+    type: influxdb
+    access: proxy
+    url: http://influxdb_v2:8086
+    # isDefault: true
+    jsonData:
+      version: Flux
+      organization: ${INFLUXDB_ORG}
+      defaultBucket: ${INFLUXDB_BUCKET}
+      tlsSkipVerify: true
+    secureJsonData:
+      token: ${INFLUXDB_ADMIN_TOKEN}
